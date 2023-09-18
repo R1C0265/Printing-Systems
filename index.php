@@ -83,7 +83,7 @@
 				<!-- main nav -->
                 <nav class="collapse navbar-collapse navbar-right" role="navigation">
                     <ul id="nav" class="nav navbar-nav">
-                        <li><a class="btn btn-primary" href="#body">Home</a></li>
+                        <li><a class="btn btn-primary" href=#body">Home</a></li>
                         <li><a href="#service">Service</a></li>
                         <li><a href="#portfolio">portfolio</a></li>
                         <li><a href="#testimonials">Testimonial</a></li>
@@ -330,8 +330,8 @@
 					<div class="row">
 					
 						<div class="sec-title text-center wow animated fadeInDown">
-							<h2>FEATURED PROJECTS</h2>
-							<p>A quick look at our cli0ent delivery services</p>
+							<h2>Current News</h2>
+							<p>A quick look at what is happening currently</p>
 						</div>
 						
 

@@ -14,7 +14,7 @@ if($check){
     $_SESSION['userImg'] = $check['u_img'];
     $_SESSION['userType'] = $check['u_type'];
 
-    echo $check['u_type'];;
+    echo $check['u_type'];
 }
 else{
     //flag error code

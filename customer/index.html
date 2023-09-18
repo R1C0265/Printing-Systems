@@ -78,14 +78,29 @@
 				<!-- main nav -->
                 <nav class="collapse navbar-collapse navbar-right" role="navigation">
 					<ul id="nav" class="nav navbar-nav">
-                        <li><a href="#body">Home</a></li>
+                        <li><a class="btn btn-primary" href="#body">Home</a></li>
                         <li><a href="#service">Service</a></li>
                         <li><a href="#portfolio">portfolio</a></li>
                         <li><a href="#testimonials">Testimonial</a></li>
                         <li><a href="#price">price</a></li>
                         <li><a href="#contact">Contact</a></li>
 						<li><a href="../login.html">Sign In</a></li>
-					
+						<li class="nav-item nav-profile dropdown">
+							<a class="nav-link dropdown-toggle navbar-brand brand-logo mr-5" href="#" data-toggle="dropdown" id="profileDropdown">
+								<img src="../img/logo.svg" class="mr-2" alt="logo"/></a>						
+							</a>
+
+							<div class="dropdown-menu  navbar-dropdown" aria-labelledby="profileDropdown">
+								<a class="dropdown-item" href="profile.php">
+									<i class="ti-settings"></i>
+								  	Settings
+								</a>
+								<a class="dropdown-item" href="../logout.php">
+								  <i class="ti-power-off text-primary"></i>
+								  Logout
+								</a>
+							  </div>
+						</li>
                     </ul>
                 </nav>
 				<!-- /main nav -->
