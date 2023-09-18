@@ -24,16 +24,16 @@
                 <img src="img/logo.svg" alt="logo" class="logo">
               </div>
               <p class="login-card-description">Sign into your account</p>
-              <form action="#!">
+              <form id="login">
                   <div class="form-group">
                     <label for="email" class="sr-only">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email address">
+                    <input type="email" name="email" id="emailField" class="form-control" placeholder="Email address">
                   </div>
                   <div class="form-group mb-4">
                     <label for="password" class="sr-only">Password</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="***********">
+                    <input type="password" name="password" id="passwordField" class="form-control" placeholder="***********">
                   </div>
-                  <input name="login" id="login" class="btn btn-block login-btn mb-4" type="button" value="Login">
+                  <button id="btnSub" class="btn btn-block btn-dark btn-lg font-weight-medium auth-form-btn">Log In</button>
                 </form>
                 <a href="#!" class="forgot-password-link">Forgot password?</a>
                 <p class="login-card-footer-text">Don't have an account? <a href="#!" class="text-reset">Register here</a></p>
@@ -76,5 +76,39 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  <script>
+    $("#login").submit(function(e) {
+     e.preventDefault();
+     
+     $.ajax({
+         url: "model/login.php",
+         type: "POST",
+         data: new FormData(this),
+         contentType: false,
+         cache: false,
+         processData: false,
+         beforeSend: function() {
+             $("#btnSub").addClass("disabled");
+             $("#btnSub").html("Processing");
+
+         },
+         success: function(data) {
+             console.log(data);
+             if (data == 1) {
+                window.location.href="admin/";
+             } else if(data==2) {
+                 window.location.href="printingSystems/";
+             }else if(data==3) {
+                 window.location.href="customer/";
+             }else if(data==4){
+                 alert("Wrong email or password");
+             }
+         },
+         error: function() {}
+     });
+ });
+</script>
+
 </body>
 </html>
