@@ -1,5 +1,6 @@
-img/
-js/
-css/
-assets/
-vendors/
+/.idea/
+/vendors/
+/css/
+/js/
+/fonts/
+/images/
