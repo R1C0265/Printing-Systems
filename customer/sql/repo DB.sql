@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 16, 2022 at 08:21 AM
--- Server version: 8.0.21
--- PHP Version: 7.3.21
+-- Generation Time: Sep 22, 2023 at 06:47 AM
+-- Server version: 8.0.31
+-- PHP Version: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `repo`
+-- Database: `printing_systems`
 --
 
 -- --------------------------------------------------------
@@ -43,10 +43,96 @@ CREATE TABLE IF NOT EXISTS `appointment` (
 -- Dumping data for table `appointment`
 --
 
-INSERT INTO `appointment` (`ap_id`, `student`, `lecture`, `ap_title`, `date_`, `state`) VALUES
-(6, 5, 4, 'Review of SRS document', '2021-07-07 09:56:00', 2),
-(7, 31, 3, 'tO DIScuss project', '2022-06-14 10:47:00', 0),
-(8, 6, 3, 'to pray', '2022-06-23 00:17:00', 0);
+INSERT INTO `appointment` (`ap_id`, `student`, `lecture`, `ap_title`, `date_`, `state`, `stamp`) VALUES
+(6, 5, 4, 'Review of SRS document', '2021-07-07 09:56:00', 2, '2023-09-21 07:54:46'),
+(7, 31, 3, 'tO DIScuss project', '2022-06-14 10:47:00', 0, '2023-09-21 07:54:46'),
+(8, 6, 3, 'to pray', '2022-06-23 00:17:00', 0, '2023-09-21 07:54:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
+  `comment_id` int NOT NULL AUTO_INCREMENT,
+  `comment_text` text,
+  `customer_id` int NOT NULL,
+  PRIMARY KEY (`comment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `information`
+--
+
+DROP TABLE IF EXISTS `information`;
+CREATE TABLE IF NOT EXISTS `information` (
+  `info_id` int NOT NULL AUTO_INCREMENT,
+  `info_title` varchar(128) DEFAULT NULL,
+  `info_description` text,
+  PRIMARY KEY (`info_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+DROP TABLE IF EXISTS `news`;
+CREATE TABLE IF NOT EXISTS `news` (
+  `news_id` int NOT NULL AUTO_INCREMENT,
+  `news_title` varchar(1280) DEFAULT NULL,
+  `news_info` text,
+  `author` varchar(128) DEFAULT NULL,
+  `news_image` text,
+  PRIMARY KEY (`news_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pages`
+--
+
+DROP TABLE IF EXISTS `pages`;
+CREATE TABLE IF NOT EXISTS `pages` (
+  `page_id` int NOT NULL AUTO_INCREMENT,
+  `page_name` varchar(50) DEFAULT NULL,
+  `page_location` text,
+  PRIMARY KEY (`page_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE IF NOT EXISTS `products` (
+  `product_id` int NOT NULL AUTO_INCREMENT,
+  `product_name` text NOT NULL,
+  `product_amount` text NOT NULL,
+  `product_category` text NOT NULL,
+  `product_price` text NOT NULL,
+  `product_image_location` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '../images/products/shoppin_cart%202.png',
+  `product_image_alt` varchar(124) DEFAULT 'an image of your selected product',
+  `product_description` text,
+  PRIMARY KEY (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`product_id`, `product_name`, `product_amount`, `product_category`, `product_price`, `product_image_location`, `product_image_alt`, `product_description`) VALUES
+(1, 'JK Golf Shirts', '200', 'Golf Shirts', '15000', '../images/products/jk golf shirt.jpeg', NULL, NULL),
+(2, 'JK T-Shirts', '190', 'T-Shirts', '15000', '../images/products/OIF.jfif', NULL, NULL),
+(3, 'Puma Soccer Boots', '20', 'Soccer Boots', '65000', '../images/products/download.jfif', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -96,21 +182,51 @@ CREATE TABLE IF NOT EXISTS `pr_docs` (
 -- Dumping data for table `pr_docs`
 --
 
-INSERT INTO `pr_docs` (`pd_id`, `type`, `file`, `pr_id`) VALUES
-(3, 'SRS Document', 'Transfer Form.docx', 3),
-(18, 'Concept Note', 'Computer Security.docx', 6),
-(20, 'SRS Document', 'Tough Bwana SRS.pdf', 6),
-(22, 'Concept Note', 'RR Concept Note', 7),
-(39, 'Concept Note', 'Tough Bwana Concept Note.pdf', 8),
-(41, 'UML Document', 'Tough Bwana UML Document.pdf', 8),
-(44, 'Concept Note', 'John Kittle concept note.pdf', 4),
-(48, 'Final Documentation', 'John Kittle Final Documentation.pdf', 4),
-(51, 'Use Case Document', 'John Kittle Use Case Document.pdf', 4),
-(56, 'UML Document', 'John Kittle UML Document.pdf', 4),
-(57, 'Final Project Zip', 'John Kittle Final Project.zip', 4),
-(58, 'DDS Document', 'John Kittle DDS Document.pdf', 4),
-(59, 'SRS Document', 'John Kittle SRS Document.pdf', 4),
-(60, 'Concept Note', 'Jimmy Kazembe concept note.pdf', 5);
+INSERT INTO `pr_docs` (`pd_id`, `type`, `file`, `stamp`, `pr_id`) VALUES
+(3, 'SRS Document', 'Transfer Form.docx', '2023-09-21 07:54:48', 3),
+(18, 'Concept Note', 'Computer Security.docx', '2023-09-21 07:54:48', 6),
+(20, 'SRS Document', 'Tough Bwana SRS.pdf', '2023-09-21 07:54:48', 6),
+(22, 'Concept Note', 'RR Concept Note', '2023-09-21 07:54:48', 7),
+(39, 'Concept Note', 'Tough Bwana Concept Note.pdf', '2023-09-21 07:54:48', 8),
+(41, 'UML Document', 'Tough Bwana UML Document.pdf', '2023-09-21 07:54:48', 8),
+(44, 'Concept Note', 'John Kittle concept note.pdf', '2023-09-21 07:54:48', 4),
+(48, 'Final Documentation', 'John Kittle Final Documentation.pdf', '2023-09-21 07:54:48', 4),
+(51, 'Use Case Document', 'John Kittle Use Case Document.pdf', '2023-09-21 07:54:48', 4),
+(56, 'UML Document', 'John Kittle UML Document.pdf', '2023-09-21 07:54:48', 4),
+(57, 'Final Project Zip', 'John Kittle Final Project.zip', '2023-09-21 07:54:48', 4),
+(58, 'DDS Document', 'John Kittle DDS Document.pdf', '2023-09-21 07:54:48', 4),
+(59, 'SRS Document', 'John Kittle SRS Document.pdf', '2023-09-21 07:54:48', 4),
+(60, 'Concept Note', 'Jimmy Kazembe concept note.pdf', '2023-09-21 07:54:48', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchases`
+--
+
+DROP TABLE IF EXISTS `purchases`;
+CREATE TABLE IF NOT EXISTS `purchases` (
+  `purchase_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NOT NULL,
+  `cart_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `purchase_timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`purchase_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+DROP TABLE IF EXISTS `services`;
+CREATE TABLE IF NOT EXISTS `services` (
+  `services_id` int NOT NULL AUTO_INCREMENT,
+  `service_name` varchar(40) DEFAULT NULL,
+  `service_description` text,
+  PRIMARY KEY (`services_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -146,6 +262,20 @@ INSERT INTO `users` (`u_id`, `u_name`, `u_email`, `u_password`, `u_type`, `u_img
 (34, 'RR', 'rr@gmail.com', '70352f41061eda4ff3c322094af068ba70c3b38b', 3, 'user.svg', '2022-06-06 13:14:40'),
 (36, 'Chadwick Boseman', 'bd@gmail.com', '70352f41061eda4ff3c322094af068ba70c3b38b', 3, 'user.svg', '2022-06-06 20:35:48'),
 (37, 'Tough Bwana', 'zgr@gmail.com', '70352f41061eda4ff3c322094af068ba70c3b38b', 3, 'user.svg', '2022-06-06 20:35:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `welcome_notes`
+--
+
+DROP TABLE IF EXISTS `welcome_notes`;
+CREATE TABLE IF NOT EXISTS `welcome_notes` (
+  `notes_id` int NOT NULL AUTO_INCREMENT,
+  `notes_title` varchar(128) DEFAULT NULL,
+  `notes_description` text,
+  PRIMARY KEY (`notes_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
