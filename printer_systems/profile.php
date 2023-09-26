@@ -17,11 +17,6 @@ include('header.php');
                 <div class="row">
                     <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                         <h3 class="font-weight-bold">Profile</h3>
-                        
-                    </div>
-                    <div class="col-12 col-xl-4">
-
-
                     </div>
                 </div>
             </div>

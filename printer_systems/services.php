@@ -10,6 +10,8 @@ include('header.php');
 ?>
 
 
+<<!-- TODO #1: use input with  the value key word to bring the value for the selected inputs-->>
+
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -33,26 +35,20 @@ include('header.php');
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">All Users</h4>
+                        <h4 class="card-title">All Services</h4>
                         <a class="btn btn-danger" onclick="topdf()">Download pdf</a>
                         <div class="table-responsive">
-                            <table class="table table-striped datatable" id="usertable">
+                        <table class="table table-striped datatable" id="usertable">
                                 <thead>
                                     <tr>
                                         <th>
-                                            Name
+                                            Service Title
                                         </th>
                                         <th>
-                                            Email
+                                            Service Description
                                         </th>
                                         <th>
-                                            user type
-                                        </th>
-                                        <th>
-                                            Added
-                                        </th>
-                                        <th>
-                                            Action
+                                            
                                         </th>
                                     </tr>
                                 </thead>
@@ -65,37 +61,23 @@ include('header.php');
                                     <tr>
 
                                         <td>
-                                            <?php echo $res['u_name'] ?>
+                                            <?php echo $res['service_title'] ?>
                                         </td>
                                         <td>
-                                            <?php echo $res['u_email'] ?>
+                                            <?php echo $res['service_description'] ?>
                                         </td>
                                         <td>
-                                            <?php
-                                        if($res['u_type']==1){
-                                            echo "Coordinator";
-                                        }else if(($res['u_type']==2)){
-                                            echo "Lecturer";
-                                        }
-                                        else echo "Student";
-                                        ?>
-                                        </td>
-                                        <td>
-                                            <?php echo dateS($res['u_stamp']) ?>
-                                        </td>
-                                        <td>
-                                            <a class="btn text-danger" href="javascript: deleteUser(<?php echo $res['u_id'] ?>)"><i
+                                            <a class="btn text-primary" href="javascript: editUser(<?php echo $res['services_id'] ?>)"><i
+                                                    class=" icon-check"></i></a>
+
+                                            <a class="btn text-danger" href="javascript: deleteUser(<?php echo $res['services_id'] ?>)"><i
                                                     class="icon-trash"></i></a>
+                                            
                                         </td>
                                     </tr>
                                     <?php
                                     }
-
-
                                     ?>
-
-
-
                                 </tbody>
                             </table>
                         </div>
@@ -104,6 +86,59 @@ include('header.php');
             </div>
 
         </div>
+
+        <div>
+            <h3 class="font-weight-bold">Add Services</h3>
+            <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="forms-sample" id="addService">
+                            <div class="form-group">
+                                <label for="service_title">Name of Service</label>
+                                <input type="text" class="form-control" name="serviceName">
+                            </div>
+                            <div class="form-group">
+                                <label for="service_description">Service Description</label>
+                                <textarea type="email" class="form-control" id="service_description" name="serviceDescription" placeholder = "Write a brief description on what the service does exactly"></textarea>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary mr-2">Add Service</button>
+
+                        </form>
+                        <hr />
+                        <h4>Update Password</h4>
+                        <form id="updPass">
+                            <div class="form-group">
+                                <label for="pass1">Old Password</label>
+                                <input type="password" minlength="8" class="form-control" required name="old"
+                                    placeholder="Old Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="pass1">New Password</label>
+                                <input type="password" minlength="8" class="form-control" required name="pass"
+                                    id="pass1" placeholder="New Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="pass2">Confirm Password</label>
+                                <input type="password" minlength="8" required class="form-control" id="pass2"
+                                    placeholder="Confirm Password">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary mr-2">Update Info</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        </div>
+
+        
+
 
 
 
@@ -160,6 +195,8 @@ include('header.php');
                 </div>
             </div>
         </div>
+
+
 
         <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
              aria-hidden="true">
@@ -277,6 +314,43 @@ include('header.php');
 
 
         });
+
+        $("#addService").submit(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: "../model/addService.php",
+                type: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $("#btnSub").addClass("disabled");
+                    $("#btnSub").html("Processing");
+
+                },
+                success: function(data) {
+                    console.log(data);
+                    if (data == 1) {
+
+                        setTimeout(function() {
+                            alert("Information Updated!");
+                            window.location.reload();
+                        }, 500);
+                    } else if (data == 3) {
+                        alert("Email already exists in system!");
+                    } else {
+                        //user not found
+                        alert("Error updating Information!");
+                    }
+                },
+                error: function() {}
+            });
+
+        });
+
+
         $("#uplStudents").submit(function(e) {
             e.preventDefault();
 
