@@ -39,8 +39,8 @@ else{
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="../images/logo.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="../images/Layer 16.png" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../images/Layer 16.png" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -98,49 +98,17 @@ else{
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="projects.php">
+            <a class="nav-link" href="Services.php">
               <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">Projects</span>
+              <span class="menu-title">Services</span>
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Supervising</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <?php
-                  $get = $db->query("SELECT * FROM users u INNER JOIN project p ON u.u_id=p.student WHERE p.lecture=$myid AND p.pr_state!=3")->fetchAll();
-                  if($get){
-                    foreach($get as $u){?>
-                      <li class="nav-item"> <a class="nav-link" href="project.php?project=<?php echo $u['pr_id'] ?>"><?php echo $u['u_name'] ?></a></li>
-                    <?php }
-                  }
-                  else{
-                    ?>
-                    <li class="nav-item"><a class="nav-link">No student here</a></li>
-                    <?php
-                  }
-                ?>
-                
-              </ul>
-            </div>
-          </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="appointments.php">
+            <a class="nav-link" href="customers.php">
               <i class="icon-tag menu-icon"></i>
-              <span class="menu-title">Appointments</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="archive.php">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Project Repository</span>
+              <span class="menu-title">Customers</span>
             </a>
           </li>
 

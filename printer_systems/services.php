@@ -260,11 +260,11 @@ include('header.php');
             var formValues = {
                 id:id
             };
-            $.post("../model/deluser.php", formValues, function(data) {
+            $.post("../model/delService.php", formValues, function(data) {
             // Display the returned data in browser
             console.log(data);
             if (data == 1) {
-                alert("User Deleted!");
+                alert("Service Deleted!");
                 setTimeout(function(e) {
                     location.reload();
                 }, 500);

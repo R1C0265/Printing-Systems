@@ -2,6 +2,7 @@
 
 require("../config/main.php");
 
+
 function getNews(){
     
     $cr = $db->query('SELECT  * FROM news ORDER BY news_id DESC LIMIT 4')->fetchAll();

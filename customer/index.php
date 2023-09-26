@@ -5,6 +5,15 @@
 <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
     <head>
+	<?php
+
+require("../config/main.php");
+
+$active=1;
+//load header content
+$link=1;
+?>
+
     	<!-- meta character set -->
         <meta charset="utf-8">
 		<!-- Always force latest IE rendering engine or request Chrome Frame -->
@@ -249,54 +258,33 @@
 			<!-- Service section -->
 			<section id="service">
 				<div class="container">
-					<div class="row">
+					
+				
+				<div class="row">
+
+					<?php
+						$services = $db->query("SELECT * FROM services ")->fetchAll();
+						
+						?>	
 					
 						<div class="sec-title text-center">
 							<h2 class="wow animated bounceInLeft">Service</h2>
 							<p class="wow animated bounceInRight">The Key Features of our Job</p>
 						</div>
-						
+						<?php foreach($services as $serv){?>
 						<div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn">
 							<div class="service-item">
+							
 								<div class="service-icon">
 									<i class="fa fa-home fa-3x"></i>
+									
 								</div>
-								<h3>Offset and digital printing</h3>
-								<p>Our Products uin digital aqnd offset printing include but not limited:<br><br>
-								 Booklets, Brochures, Leaflets, Catalogues,Business cards, folders,Newspaper Inserts,PVC cards, Invitations, Certificates, Letterhead, Envelopes, Identity cards, Annual Report, Fliers, Tickets, Newsletters.
+								<h3><?php echo $serv['service_title'];?></h3>
+								<p><?php echo $serv['service_description'];?></p>
 							</div>
+							
 						</div>
-					
-						<div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn" data-wow-delay="0.3s">
-							<div class="service-item">
-								<div class="service-icon">
-									<i class="fa fa-tasks fa-3x"></i>
-								</div>
-								<h3>Large Format Printing</h3>
-								<p>Our products is large format printing include: <br><br>  Road Banners, Roll-up banners, X-banners,Pop-Ups, Billboards, Clip Frames, Tear drops, Posters, Stickers, Wall signs, Road signs, Lamination, Full color posters, POP Display stand, Picture Frames </p>
-							</div>
-						</div>
-					
-						<div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn" data-wow-delay="0.6s">
-							<div class="service-item">
-								<div class="service-icon">
-									<i class="fa fa-clock-o fa-3x"></i>
-								</div>
-								<h3>Embroidery</h3>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-							</div>
-						</div>
-					
-						<div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn" data-wow-delay="0.9s">
-							<div class="service-item">
-								<div class="service-icon">
-									<i class="fa fa-heart fa-3x"></i>
-								</div>
-								
-								<h3>Merchandising</h3>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>							
-							</div>
-						</div>
+						<?php }?>
 						
 					</div>
 				</div>

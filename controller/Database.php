@@ -97,6 +97,7 @@ class Database {
         return $result;
     }
 
+
     public function close() {
         return $this->connection->close();
     }
